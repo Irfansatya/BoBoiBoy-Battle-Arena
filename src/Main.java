@@ -1,90 +1,66 @@
-
 import java.util.Scanner;
 
 public class Main {
 
+    // Scanner untuk input
     private static final Scanner input = new Scanner(System.in);
 
-    // ======================================
-    // INPUT ANGKA
-    // ======================================
-
+    // Membaca angka dengan validasi
     public static int bacaAngka(int min, int max) {
-        int pilihan;
-
         while (true) {
-            System.out.print("Masukkan pilihan: ");
-            String teks = input.nextLine();
+            System.out.print("Pilihan: ");
 
             try {
-                pilihan = Integer.parseInt(teks);
+                int pilihan = Integer.parseInt(input.nextLine());
 
                 if (pilihan >= min && pilihan <= max) {
                     return pilihan;
                 }
 
                 System.out.println(
-                        "Pilihan harus berada antara " + min + " dan " + max + "."
+                        "Pilihan harus antara " + min + " - " + max + "."
                 );
 
             } catch (NumberFormatException e) {
-                System.out.println("Input harus berupa angka!");
+                System.out.println("Input harus berupa angka.");
             }
         }
     }
 
-    // ======================================
-    // PEMILIHAN KUBU
-    // ======================================
-
-    public static int pilihKubuPemainPertama() {
+    // Memilih kubu pemain
+    public static int pilihKubu(String namaPemain) {
         System.out.println("\n================================");
-        System.out.println(" PEMILIHAN KUBU PEMAIN 1");
+        System.out.println(" PILIH KUBU " + namaPemain);
         System.out.println("================================");
-        System.out.println("1. Kubu BoBoiBoy");
-        System.out.println("2. Kubu Musuh");
+        System.out.println("1. BoBoiBoy");
+        System.out.println("2. Musuh");
 
         return bacaAngka(1, 2);
     }
 
-    public static int pilihKubuPemainKedua(int kubuPemainPertama) {
+    // Kubu pemain kedua otomatis berbeda
+    public static int pilihKubuPemainKedua(int kubuPemain1) {
         System.out.println("\n================================");
-        System.out.println(" PEMILIHAN KUBU PEMAIN 2");
+        System.out.println(" PILIH KUBU PEMAIN 2");
         System.out.println("================================");
-        System.out.println("1. Kubu BoBoiBoy");
-        System.out.println("2. Kubu Musuh");
 
-        int pilihan;
-
-        do {
-            pilihan = bacaAngka(1, 2);
-
-            if (pilihan == kubuPemainPertama) {
-                System.out.println(
-                        "Kubu tidak tersedia! Pilih kubu yang berbeda dari Pemain 1."
-                );
-            }
-
-        } while (pilihan == kubuPemainPertama);
-
-        return pilihan;
-    }
-
-    public static String namaKubu(int kubu) {
-        if (kubu == 1) {
-            return "BoBoiBoy";
+        if (kubuPemain1 == 1) {
+            System.out.println(
+                    "Pemain 2 otomatis menggunakan kubu Musuh."
+            );
+            return 2;
+        } else {
+            System.out.println(
+                    "Pemain 2 otomatis menggunakan kubu BoBoiBoy."
+            );
+            return 1;
         }
-
-        return "Musuh";
     }
 
-    // ======================================
-    // PEMILIHAN KARAKTER BOBOIBOY
-    // ======================================
-
+    // Memilih karakter BoBoiBoy
     public static Karakter pilihKarakterBoBoiBoy() {
         System.out.println("\n================================");
-        System.out.println(" DAFTAR KARAKTER BOBOIBOY");
+        System.out.println(" PILIH KARAKTER BOBOIBOY");
         System.out.println("================================");
         System.out.println("1. BoBoiBoy Gempa");
         System.out.println("2. BoBoiBoy Halilintar");
@@ -96,54 +72,99 @@ public class Main {
         int pilihan = bacaAngka(1, 6);
 
         switch (pilihan) {
-            case 1:
-                return new KarakterBoBoiBoy(
-                        "B-01", "BoBoiBoy Gempa",
-                        150, 100, 22, 45, "Tinju Gempa"
-                );
+            case 1: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-001",
+                                "BoBoiBoy Gempa",
+                                150,
+                                100,
+                                22,
+                                45,
+                                "Tinju Gempa"
+                        );
+                return (Karakter) penyerang;
+            }
 
-            case 2:
-                return new KarakterBoBoiBoy(
-                        "B-02", "BoBoiBoy Halilintar",
-                        120, 100, 28, 50, "Sambaran Petir"
-                );
+            case 2: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-002",
+                                "BoBoiBoy Halilintar",
+                                120,
+                                100,
+                                28,
+                                50,
+                                "Sambaran Petir"
+                        );
+                return (Karakter) penyerang;
+            }
 
-            case 3:
-                return new KarakterBoBoiBoy(
-                        "B-03", "BoBoiBoy Solar",
-                        125, 100, 25, 48, "Solar Flare"
-                );
+            case 3: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-003",
+                                "BoBoiBoy Solar",
+                                125,
+                                100,
+                                25,
+                                48,
+                                "Solar Flare"
+                        );
+                return (Karakter) penyerang;
+            }
 
-            case 4:
-                return new KarakterBoBoiBoy(
-                        "B-04", "BoBoiBoy Ice",
-                        135, 100, 23, 42, "Serangan Es"
-                );
+            case 4: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-004",
+                                "BoBoiBoy Ice",
+                                135,
+                                100,
+                                23,
+                                42,
+                                "Serangan Es"
+                        );
+                return (Karakter) penyerang;
+            }
 
-            case 5:
-                return new KarakterBoBoiBoy(
-                        "B-05", "Fang",
-                        130, 100, 25, 46, "Serangan Bayangan"
-                );
+            case 5: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-005",
+                                "Fang",
+                                130,
+                                100,
+                                25,
+                                46,
+                                "Serangan Bayangan"
+                        );
+                return (Karakter) penyerang;
+            }
 
-            case 6:
-                return new KarakterBoBoiBoy(
-                        "B-06", "Gopal",
-                        145, 100, 20, 40, "Serangan Makanan"
-                );
+            case 6: {
+                Penyerang penyerang =
+                        new KarakterBoBoiBoy(
+                                "B-006",
+                                "Gopal",
+                                145,
+                                100,
+                                20,
+                                40,
+                                "Serangan Makanan"
+                        );
+                return (Karakter) penyerang;
+            }
 
             default:
                 return null;
         }
     }
 
-    // ======================================
-    // PEMILIHAN KARAKTER MUSUH
-    // ======================================
-
-    public static Karakter pilihKarakterMusuh() {
+    // Memilih karakter musuh
+    public static KarakterMusuh pilihKarakterMusuh() {
         System.out.println("\n================================");
-        System.out.println(" DAFTAR KARAKTER MUSUH");
+        System.out.println(" PILIH KARAKTER MUSUH");
         System.out.println("================================");
         System.out.println("1. Ejo Jo");
         System.out.println("2. Adudu");
@@ -154,350 +175,326 @@ public class Main {
         int pilihan = bacaAngka(1, 5);
 
         switch (pilihan) {
-            case 1:
-                return new KarakterMusuh(
-                        "M-01", "Ejo Jo",
-                        130, 100, 25, 45, "Serangan Teknologi"
-                );
+            case 1: {
+                Penyerang penyerang =
+                        new KarakterMusuh(
+                                "M-001",
+                                "Ejo Jo",
+                                130,
+                                100,
+                                25,
+                                45,
+                                "Serangan Teknologi"
+                        );
+                return (KarakterMusuh) penyerang;
+            }
 
-            case 2:
-                return new KarakterMusuh(
-                        "M-02", "Adudu",
-                        115, 100, 22, 40, "Serangan Senjata"
-                );
+            case 2: {
+                Penyerang penyerang =
+                        new KarakterMusuh(
+                                "M-002",
+                                "Adudu",
+                                115,
+                                100,
+                                22,
+                                40,
+                                "Serangan Senjata"
+                        );
+                return (KarakterMusuh) penyerang;
+            }
 
-            case 3:
-                return new KarakterMusuh(
-                        "M-03", "Probe",
-                        120, 100, 24, 43, "Serangan Laser"
-                );
+            case 3: {
+                Penyerang penyerang =
+                        new KarakterMusuh(
+                                "M-003",
+                                "Probe",
+                                120,
+                                100,
+                                24,
+                                43,
+                                "Serangan Laser"
+                        );
+                return (KarakterMusuh) penyerang;
+            }
 
-            case 4:
-                return new KarakterMusuh(
-                        "M-04", "Retak'ka",
-                        170, 100, 30, 55, "Kekuatan Elemen"
-                );
+            case 4: {
+                Penyerang penyerang =
+                        new KarakterMusuh(
+                                "M-004",
+                                "Retak'ka",
+                                170,
+                                100,
+                                30,
+                                55,
+                                "Kekuatan Elemen"
+                        );
+                return (KarakterMusuh) penyerang;
+            }
 
-            case 5:
-                return new KarakterMusuh(
-                        "M-05", "Bora Ra",
-                        150, 100, 27, 48, "Serangan Bora Ra"
-                );
+            case 5: {
+                Penyerang penyerang =
+                        new KarakterMusuh(
+                                "M-005",
+                                "Bora Ra",
+                                150,
+                                100,
+                                27,
+                                48,
+                                "Serangan Bora Ra"
+                        );
+                return (KarakterMusuh) penyerang;
+            }
 
             default:
                 return null;
         }
     }
 
-    // ======================================
-    // PEMILIHAN KARAKTER BERDASARKAN KUBU
-    // ======================================
-
+    // Memilih karakter sesuai kubu
     public static Karakter pilihKarakter(int kubu) {
         if (kubu == 1) {
             return pilihKarakterBoBoiBoy();
+        } else {
+            return pilihKarakterMusuh();
         }
-
-        return pilihKarakterMusuh();
     }
 
-    // ======================================
-    // 9. PENGUJIAN POLIMORFISME INTERFACE
-    // ======================================
+    // Membuat referensi interface Penyerang
+    public static Penyerang sebagaiPenyerang(Karakter karakter) {
+        if (karakter instanceof Penyerang) {
+            return (Penyerang) karakter;
+        }
 
-    public static void ujiPolimorfismeInterface() {
+        return null;
+    }
+
+    // Menampilkan status pertarungan
+    public static void tampilkanStatusPertarungan(
+            Karakter pemain1,
+            Karakter pemain2
+    ) {
         System.out.println("\n================================");
-        System.out.println(" 9. POLIMORFISME INTERFACE");
+        System.out.println("       STATUS PERTARUNGAN");
         System.out.println("================================");
 
-        // Objek target untuk pengujian
-        Karakter target = new KarakterMusuh(
-                "M-TEST",
-                "Musuh Pengujian",
-                500,
-                100,
-                20,
-                40,
-                "Serangan Pengujian"
-        );
+        System.out.println("\nPEMAIN 1:");
+        pemain1.tampilkanStatus();
 
-        /*
-         * Referensi bertipe interface Penyerang
-         * dapat menampung objek KarakterBoBoiBoy.
-         */
-        Penyerang objGempa = new KarakterBoBoiBoy(
-                "B-TEST",
-                "BoBoiBoy Gempa",
-                150,
-                100,
-                22,
-                45,
-                "Tinju Gempa"
-        );
-
-        /*
-         * Referensi bertipe interface Penyerang
-         * juga dapat menampung objek KarakterMusuh.
-         */
-        Penyerang objRetakka = new KarakterMusuh(
-                "M-TEST2",
-                "Retak'ka",
-                170,
-                100,
-                30,
-                55,
-                "Kekuatan Elemen"
-        );
-
-        // Memanggil method melalui referensi interface
-        System.out.println("\nPengujian objek BoBoiBoy Gempa:");
-        objGempa.serang(target);
-
-        System.out.println("\nPengujian objek Retak'ka:");
-        objRetakka.serang(target);
-
-        System.out.println("\nStatus target setelah pengujian:");
-        target.tampilkanStatus();
+        System.out.println("\nPEMAIN 2:");
+        pemain2.tampilkanStatus();
     }
 
-    // ======================================
-    // MENU AKSI PEMAIN
-    // ======================================
-
-    public static void jalankanAksi(
-            Karakter pemain,
-            Karakter lawan,
-            String namaPemain
-    ) {
-        boolean selesaiMemilih = false;
-
-        while (!selesaiMemilih) {
-            System.out.println("\n================================");
-            System.out.println(" GILIRAN " + namaPemain.toUpperCase());
-            System.out.println("================================");
-
-            System.out.println("Karakter: " + pemain.getNama());
-            System.out.println("Lawan   : " + lawan.getNama());
-
-            System.out.println("\n1. Serang");
-            System.out.println("2. Gunakan Kemampuan Khusus");
-            System.out.println("3. Bertahan");
-            System.out.println("4. Lihat Status");
-
-            int pilihan = bacaAngka(1, 4);
-
-            switch (pilihan) {
-                case 1:
-                    /*
-                     * Polimorfisme interface:
-                     * objek diperlakukan sebagai Penyerang.
-                     */
-                    Penyerang penyerang = (Penyerang) pemain;
-                    penyerang.serang(lawan);
-
-                    selesaiMemilih = true;
-                    break;
-
-                case 2:
-                    /*
-                     * Polimorfisme interface:
-                     * objek diperlakukan sebagai KemampuanKhusus.
-                     */
-                    KemampuanKhusus kemampuan =
-                            (KemampuanKhusus) pemain;
-
-                    kemampuan.gunakanKemampuan(lawan);
-
-                    selesaiMemilih = true;
-                    break;
-
-                case 3:
-                    /*
-                     * Polimorfisme interface:
-                     * objek diperlakukan sebagai Bertahan.
-                     */
-                    Bertahan pertahanan = (Bertahan) pemain;
-                    pertahanan.bertahan();
-
-                    selesaiMemilih = true;
-                    break;
-
-                case 4:
-                    System.out.println("\n--- STATUS PEMAIN ---");
-                    pemain.tampilkanStatus();
-
-                    System.out.println("\n--- STATUS LAWAN ---");
-                    lawan.tampilkanStatus();
-
-                    System.out.println(
-                            "\nSilakan pilih aksi kembali. Giliran belum berakhir."
-                    );
-                    break;
-            }
-        }
+    // Menampilkan menu aksi
+    public static void menuAksi() {
+        System.out.println("\nPILIH AKSI:");
+        System.out.println("1. Serang");
+        System.out.println("2. Kemampuan Khusus");
+        System.out.println("3. Bertahan");
+        System.out.println("4. Lihat Status");
     }
 
-    // ======================================
-    // MEKANISME PERTARUNGAN
-    // ======================================
-
+    // Proses pertarungan
     public static void mulaiPertarungan(
             Karakter pemain1,
             Karakter pemain2
     ) {
         int giliran = 1;
 
+        Penyerang penyerangPemain1 =
+                sebagaiPenyerang(pemain1);
+
+        Penyerang penyerangPemain2 =
+                sebagaiPenyerang(pemain2);
+
         System.out.println("\n================================");
         System.out.println("       PERTARUNGAN DIMULAI");
         System.out.println("================================");
 
-        System.out.println(
-                "Pemain 1 menggunakan: " + pemain1.getNama()
-        );
+        while (pemain1.isAktif() && pemain2.isAktif()) {
+            Karakter pemainAktif;
+            Karakter target;
+            Penyerang penyerangAktif;
 
-        System.out.println(
-                "Pemain 2 menggunakan: " + pemain2.getNama()
-        );
-
-        while (
-                pemain1.hitungPersentaseHP() > 0
-                        && pemain2.hitungPersentaseHP() > 0
-        ) {
-            System.out.println("\n\n================================");
-            System.out.println("          GILIRAN KE-" + giliran);
-            System.out.println("================================");
-
-            // Giliran Pemain 1
-            if (
-                    pemain1.hitungPersentaseHP() > 0
-                            && pemain2.hitungPersentaseHP() > 0
-            ) {
-                jalankanAksi(pemain1, pemain2, "Pemain 1");
+            if (giliran == 1) {
+                pemainAktif = pemain1;
+                target = pemain2;
+                penyerangAktif = penyerangPemain1;
+            } else {
+                pemainAktif = pemain2;
+                target = pemain1;
+                penyerangAktif = penyerangPemain2;
             }
 
-            // Periksa apakah pertarungan sudah berakhir
-            if (
-                    pemain1.hitungPersentaseHP() <= 0
-                            || pemain2.hitungPersentaseHP() <= 0
-            ) {
+            System.out.println("\n================================");
+            System.out.println(" GILIRAN PEMAIN " + giliran);
+            System.out.println("================================");
+
+            System.out.println(
+                    "Karakter: " + pemainAktif.getNama()
+            );
+            System.out.println(
+                    "HP: " + pemainAktif.getHp()
+            );
+            System.out.println(
+                    "Energi: " + pemainAktif.getEnergi()
+            );
+
+            menuAksi();
+
+            int aksi = bacaAngka(1, 4);
+
+            switch (aksi) {
+                // Polimorfisme interface
+                case 1:
+                    penyerangAktif.serang(target);
+                    break;
+
+                case 2:
+                    KemampuanKhusus kemampuan;
+
+                    if (giliran == 1) {
+                        kemampuan =
+                                (KemampuanKhusus) pemain1;
+                    } else {
+                        kemampuan =
+                                (KemampuanKhusus) pemain2;
+                    }
+
+                    kemampuan.gunakanKemampuan(target);
+                    break;
+
+                case 3:
+                    Bertahan pertahanan;
+
+                    if (giliran == 1) {
+                        pertahanan =
+                                (Bertahan) pemain1;
+                    } else {
+                        pertahanan =
+                                (Bertahan) pemain2;
+                    }
+
+                    pertahanan.bertahan();
+                    break;
+
+                case 4:
+                    tampilkanStatusPertarungan(
+                            pemain1,
+                            pemain2
+                    );
+
+                    // Melihat status tidak menghabiskan giliran
+                    continue;
+            }
+
+            // Memeriksa pertarungan
+            if (!pemain1.isAktif() || !pemain2.isAktif()) {
                 break;
             }
 
-            // Giliran Pemain 2
-            jalankanAksi(pemain2, pemain1, "Pemain 2");
-
-            giliran++;
+            giliran = giliran == 1 ? 2 : 1;
         }
 
-        // ======================================
-        // HASIL PERTARUNGAN
-        // ======================================
-
-        System.out.println("\n\n================================");
-        System.out.println("       PERTARUNGAN SELESAI");
-        System.out.println("================================");
-
-        System.out.println("\n--- STATUS AKHIR PEMAIN 1 ---");
-        pemain1.tampilkanStatus();
-
-        System.out.println("\n--- STATUS AKHIR PEMAIN 2 ---");
-        pemain2.tampilkanStatus();
-
-        System.out.println("\n================================");
-        System.out.println("          HASIL AKHIR");
-        System.out.println("================================");
-
-        if (
-                pemain1.hitungPersentaseHP() <= 0
-                        && pemain2.hitungPersentaseHP() <= 0
-        ) {
-            System.out.println("Pertarungan berakhir seri!");
-
-        } else if (pemain2.hitungPersentaseHP() <= 0) {
-            System.out.println("PEMENANG: PEMAIN 1");
-            System.out.println("Karakter: " + pemain1.getNama());
-
-        } else {
-            System.out.println("PEMENANG: PEMAIN 2");
-            System.out.println("Karakter: " + pemain2.getNama());
-        }
-
-        System.out.println("================================");
+        // Menentukan pemenang
+        tampilkanPemenang(
+                pemain1,
+                pemain2
+        );
     }
 
-    // ======================================
-    // MAIN PROGRAM
-    // ======================================
+    // Menampilkan pemenang
+    public static void tampilkanPemenang(
+            Karakter pemain1,
+            Karakter pemain2
+    ) {
+        System.out.println("\n================================");
+        System.out.println("       HASIL PERTARUNGAN");
+        System.out.println("================================");
 
+        if (pemain1.isAktif()) {
+            System.out.println(
+                    "PEMENANG: PEMAIN 1"
+            );
+            System.out.println(
+                    "Karakter: " + pemain1.getNama()
+            );
+        } else {
+            System.out.println(
+                    "PEMENANG: PEMAIN 2"
+            );
+            System.out.println(
+                    "Karakter: " + pemain2.getNama()
+            );
+        }
+
+        System.out.println("\nStatus akhir:");
+        pemain1.tampilkanStatus();
+        pemain2.tampilkanStatus();
+
+        // GAME OVER dihapus agar tampilan tetap seperti sebelumnya
+    }
+
+    // Main method
     public static void main(String[] args) {
-
-        System.out.println("================================");
+        System.out.println("======================================");
         System.out.println("       BOBOIBOY BATTLE ARENA");
-        System.out.println("================================");
-        System.out.println("Game pertarungan dua pemain");
-        System.out.println("Pilih karakter dan jadilah pemenang!");
-
-        // Pengujian polimorfisme interface secara eksplisit
-        // ujiPolimorfismeInterface();
-
-        // ======================================
-        // PEMILIHAN KUBU
-        // ======================================
-
-        int kubuPemain1 = pilihKubuPemainPertama();
-        int kubuPemain2 = pilihKubuPemainKedua(kubuPemain1);
-
-        System.out.println("\n================================");
-        System.out.println("         KUBU TERPILIH");
-        System.out.println("================================");
+        System.out.println("======================================");
 
         System.out.println(
-                "Pemain 1 memilih kubu " + namaKubu(kubuPemain1)
+                "Pertarungan antara BoBoiBoy dan Musuh!"
         );
-
         System.out.println(
-                "Pemain 2 memilih kubu " + namaKubu(kubuPemain2)
+                "Pilih karaktermu dan menangkan pertarungan!"
         );
 
-        // ======================================
-        // PEMILIHAN KARAKTER
-        // ======================================
+        // Pemain 1 memilih kubu
+        int kubuPemain1 =
+                pilihKubu("PEMAIN 1");
 
-        System.out.println("\n================================");
-        System.out.println("       PEMILIHAN KARAKTER");
-        System.out.println("================================");
+        // Pemain 2 memilih kubu
+        int kubuPemain2 =
+                pilihKubuPemainKedua(kubuPemain1);
 
-        System.out.println("\nPemain 1 memilih karakter:");
-        Karakter pemain1 = pilihKarakter(kubuPemain1);
+        // Pemain 1 memilih karakter
+        System.out.println(
+                "\nPEMAIN 1 MEMILIH KARAKTER"
+        );
 
-        System.out.println("\nPemain 2 memilih karakter:");
-        Karakter pemain2 = pilihKarakter(kubuPemain2);
+        Karakter pemain1 =
+                pilihKarakter(kubuPemain1);
 
-        // ======================================
-        // KONFIRMASI KARAKTER
-        // ======================================
+        // Pemain 2 memilih karakter
+        System.out.println(
+                "\nPEMAIN 2 MEMILIH KARAKTER"
+        );
 
+        Karakter pemain2 =
+                pilihKarakter(kubuPemain2);
+
+        // Menampilkan karakter terpilih
         System.out.println("\n================================");
         System.out.println("       KARAKTER TERPILIH");
         System.out.println("================================");
 
-        System.out.println("\nPemain 1:");
-        pemain1.tampilkanStatus();
+        System.out.println(
+                "Pemain 1: " + pemain1.getNama()
+        );
+        System.out.println(
+                "Pemain 2: " + pemain2.getNama()
+        );
 
-        System.out.println("\nPemain 2:");
-        pemain2.tampilkanStatus();
+        // Menunggu Enter sebelum pertarungan
+        System.out.println(
+                "\nTekan ENTER untuk memulai pertarungan..."
+        );
 
-        // ======================================
-        // MEMULAI PERTARUNGAN
-        // ======================================
-
-        System.out.println("\nTekan Enter untuk memulai pertarungan...");
         input.nextLine();
 
-        mulaiPertarungan(pemain1, pemain2);
-
-        System.out.println("\nTerima kasih telah memainkan");
-        System.out.println("BOBOIBOY BATTLE ARENA!");
+        // Memulai pertarungan
+        mulaiPertarungan(
+                pemain1,
+                pemain2
+        );
 
         input.close();
     }
