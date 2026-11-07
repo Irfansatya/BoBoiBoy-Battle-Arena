@@ -72,16 +72,19 @@ Project ini dikembangkan untuk menerapkan sepuluh persyaratan konsep OOP dalam s
 
 ```text
 BoBoiBoy-Battle-Arena/
-│
-├── GameConfig.java
-├── Penyerang.java
-├── KemampuanKhusus.java
-├── Bertahan.java
-├── Karakter.java
-├── KarakterBoBoiBoy.java
-├── KarakterMusuh.java
-├── Main.java
-│
+├── .idea/
+├── screenshots/
+├── src/
+│   ├── Bertahan.java
+│   ├── GameConfig.java
+│   ├── Karakter.java
+│   ├── KarakterBoBoiBoy.java
+│   ├── KarakterMusuh.java
+│   ├── KemampuanKhusus.java
+│   ├── Main.java
+│   └── Penyerang.java
+├── .gitignore
+├── BoBoiBoy-Battle-Arena.iml
 └── README.md
 ```
 
@@ -133,20 +136,30 @@ Program akan menampilkan menu pemilihan kubu, pemilihan karakter, dan mekanisme 
 
 ### 1. Tampilan Awal dan Pemilihan Kubu
 
+![screenshot1](screenshots/screenshot1.png)
+
 Keterangan: Menampilkan judul BoBoiBoy Battle Arena dan proses pemilihan kubu oleh Pemain 1 serta Pemain 2. Sistem memastikan kedua pemain tidak dapat memilih kubu yang sama.
 
 ### 2. Pemilihan Karakter
+
+![screenshot2](screenshots/screenshot2.png)
 
 Keterangan: Menampilkan daftar karakter dari masing-masing kubu. Setiap pemain dapat memilih satu karakter sesuai kubu yang telah dipilih sebelumnya.
 
 ### 3. Tampilan Awal Pertarungan
 
+![screenshot3](screenshots/screenshot3.png)
+
 Keterangan: Menampilkan karakter yang telah dipilih oleh kedua pemain, termasuk informasi HP, energi, damage serangan, dan kemampuan khusus.
 
 ### 4. Pengujian Aksi Pertarungan
 
+![screenshot4](screenshots/screenshot4.png)
+
 Keterangan: Menampilkan proses pertarungan 1 vs 1 yang meliputi serangan dasar, penggunaan kemampuan khusus, pertahanan, dan perubahan status HP serta energi karakter.
 
 ### 5. Hasil Akhir Pertarungan
+
+![screenshot5](screenshots/screenshot5.png)
 
 Keterangan: Menampilkan hasil pertarungan setelah salah satu karakter mencapai HP 0, termasuk informasi nama pemain dan karakter yang memenangkan pertandingan.
